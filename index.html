@@ -582,7 +582,7 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
   <div class="wrap">
     <p><b>커플 에니어그램 심층 분석</b> — 카톡 대화 내보내기 기반 관계 리포트 (베타)</p>
     <p style="margin-top:8px">본 리포트는 대화 습관 지표를 바탕으로 한 참고 분석이며, 심리학적·의학적 진단을 대체하지 않습니다. 위기 상황에서는 전문 상담을 권합니다.</p>
-    <div class="fl"><span>© 2026</span><span>PROTOTYPE v1 · DEMO</span></div>
+    <div class="fl"><span>© 2026</span><span>PROTOTYPE v1 · BETA</span></div>
   </div>
 </footer>
 
@@ -605,7 +605,7 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
       </div>
       <div class="form-err hidden" id="betaErr"></div>
       <button class="btn btn-primary" id="submitBeta">베타 1순위로 신청하기</button>
-      <p class="fine">입력한 정보는 오픈 안내에만 사용하고, 그 외 목적으로 쓰지 않습니다.</p>
+      <p class="fine">입력한 이메일·인스타 ID는 구글 폼으로 접수되어 오픈 안내에만 쓰고, 그 외 목적으로 쓰지 않습니다.</p>
     </div>
     <div id="betaDoneView" class="thanks hidden">
       <div class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -623,14 +623,42 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
 "use strict";
 
 /* =========================================================
-   설정 · 베타 신청 엔드포인트
-   - 실제 리드를 모으려면 아래 BETA_ENDPOINT 에 Google Apps Script
-     웹앱 URL(또는 폼 엔드포인트)을 넣으면 그대로 POST 됩니다.
-   - 비어 있으면 데모 모드: 이 브라우저(localStorage)에만 남습니다.
+   설정 · 베타 신청 접수처 (Google Forms)
+   - 모달에서 신청하면 아래 Google Form 으로 바로 POST 됩니다.
+     응답이 쌓이는 곳: Google Drive › '커플 에니어그램 베타 신청' 설문지의 응답 탭
+   - entry.* 는 설문지 질문 ID(이메일 / 인스타 ID / 신청 시각 / 유입 경로)입니다.
+     질문을 새로 만들면 공개 응답 HTML의 FB_PUBLIC_LOAD_DATA_ 에서 다시 확인해야 합니다.
    ========================================================= */
 const CONFIG = {
-  BETA_ENDPOINT: ""   // 예: "https://script.google.com/macros/s/AKfy.../exec"
+  BETA_FORM_ACTION: "https://docs.google.com/forms/d/e/1FAIpQLSfx2q0G6uIjv6EjMjJuRiXyj3uZg689w49N5SqWXB50ZTj4gQ/formResponse",
+  BETA_ENTRY: {
+    email:     "entry.1173838581",
+    instagram: "entry.1139894040",
+    at:        "entry.1650453774",
+    source:    "entry.1725780174"
+  }
 };
+
+/* 신청 시각 · 유입 경로 값 만들기 */
+function nowStamp(){
+  try {
+    return new Intl.DateTimeFormat('sv-SE', {
+      timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit',
+      hour:'2-digit', minute:'2-digit', second:'2-digit', hour12:false
+    }).format(new Date()) + ' (KST)';
+  } catch(e){
+    return new Date().toISOString();
+  }
+}
+function entrySource(){
+  try {
+    const q = new URLSearchParams(location.search);
+    const s = (q.get('src') || q.get('utm_source') || '').trim();
+    if (s) return 'landing:' + s;
+    if (document.referrer) return 'referrer:' + new URL(document.referrer).host;
+  } catch(e){}
+  return 'direct';
+}
 
 /* ---------------- utils ---------------- */
 const $  = (s,r)=> (r||document).querySelector(s);
@@ -1340,8 +1368,14 @@ function bind(){
     err.classList.add('hidden'); fld.classList.remove('bad');
     const btn = $('#submitBeta');
     btn.disabled = true; btn.textContent = '신청 중...';
-    await submitBeta({ email, instagram: insta, at: new Date().toISOString(), source: 'prototype' });
+    await submitBeta({
+      email: email,
+      instagram: insta,
+      at: nowStamp(),
+      source: entrySource()
+    });
     btn.disabled = false; btn.textContent = '베타 1순위로 신청하기';
+    $('#betaEmail').value = ''; $('#betaInsta').value = '';
     $('#betaFormView').classList.add('hidden');
     $('#betaDoneView').classList.remove('hidden');
     $('#betaStamp').textContent = '신청 접수 완료 · ' + fmtDate(new Date());
@@ -1349,23 +1383,29 @@ function bind(){
 }
 
 async function submitBeta(payload){
-  if (CONFIG.BETA_ENDPOINT){
+  // 1) Google Forms 로 실제 접수 → 설문지 '응답' 탭에 한 줄씩 쌓입니다.
+  if (CONFIG.BETA_FORM_ACTION){
+    const body = new URLSearchParams();
+    body.set(CONFIG.BETA_ENTRY.email, payload.email);
+    body.set(CONFIG.BETA_ENTRY.instagram, payload.instagram || '');
+    body.set(CONFIG.BETA_ENTRY.at, payload.at || '');
+    body.set(CONFIG.BETA_ENTRY.source, payload.source || '');
     try {
-      await fetch(CONFIG.BETA_ENDPOINT, {
+      // no-cors: 응답 본문은 볼 수 없지만, 요청은 그대로 접수됩니다.
+      await fetch(CONFIG.BETA_FORM_ACTION, {
         method:'POST', mode:'no-cors',
-        headers:{'Content-Type':'text/plain;charset=utf-8'},
-        body: JSON.stringify(payload)
+        headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},
+        body: body.toString()
       });
-      return;
-    } catch(e){ /* 실패해도 아래 로컬 기록으로 남김 */ }
+    } catch(e){ /* 네트워크·차단 시에도 아래 로컬 백업은 남김 */ }
   }
+  // 2) 백업: 같은 브라우저에 한 번 더 남겨 둡니다(접수 누락 확인용).
   try {
     const arr = JSON.parse(localStorage.getItem('ce_beta_signups') || '[]');
     arr.push(payload);
     localStorage.setItem('ce_beta_signups', JSON.stringify(arr));
   } catch(e){}
-  // 데모 모드 기록(개발자 확인용)
-  if (window.console) console.log('[demo] beta signup', payload);
+  if (window.console) console.log('[beta signup]', payload);
 }
 
 /* ---------------- 부트 ---------------- */
