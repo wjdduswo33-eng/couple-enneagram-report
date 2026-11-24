@@ -11,28 +11,33 @@
 - **잠금 리포트**: 6개 챕터 목차, 블러 미리보기, 19,900원 → 9,900원 앵커링, 베타 신청 모달.
 - **개인정보**: 분석은 전부 브라우저 안에서 수행. 서버 전송·로그 저장 없음. 원문은 계산 후 메모리에서 폐기.
 
-## 베타 신청 리드를 실제로 받으려면
+## 베타 신청은 어디로 들어오나
 
-`index.html` 안의 `CONFIG.BETA_ENDPOINT` 한 곳만 바꾸면 됩니다.
+모달에서 신청하면 **Google Forms 응답으로 바로 접수**됩니다. 별도 서버·스프레드시트 없이
+Google Drive 안의 설문지 응답 탭에서 확인할 수 있습니다.
+
+- 설문지: `커플 에니어그램 베타 신청` (wjdduswo33@gmail.com 드라이브)
+- 편집: https://docs.google.com/forms/d/1e8DKSjTMbIeUP4ZT3QTYFO4mZNJwtheu_4OgJtdLd40/edit
+- 응답 보기: 설문지 편집 화면 → **응답** 탭 (또는 Google Sheets로 연결)
+- 질문: 이메일(필수) / 인스타그램 ID / 신청 시각 / 유입 경로
+
+`index.html` 의 `CONFIG` 에 접수처가 들어 있습니다.
 
 ```js
 const CONFIG = {
-  BETA_ENDPOINT: "https://script.google.com/macros/s/XXXX/exec"
+  BETA_FORM_ACTION: "https://docs.google.com/forms/d/e/1FAIpQLSd.../formResponse",
+  BETA_ENTRY: {
+    email: "entry.1173838581", instagram: "entry.1139894040",
+    at: "entry.1650453774", source: "entry.1725780174"
+  }
 };
 ```
 
-Google Apps Script 예시(Google Sheet에 적재):
+설문지 질문을 새로 만들면 공개 응답 페이지 HTML의 `FB_PUBLIC_LOAD_DATA_` 에서
+`entry.*` 값을 다시 확인해 `BETA_ENTRY` 를 맞춰야 합니다.
+접수는 `mode:'no-cors'` POST 라서 브라우저는 성공 여부를 읽지 못합니다.
+그래서 같은 신청을 방문자 브라우저 `localStorage('ce_beta_signups')` 에도 한 번 더 남깁니다(백업).
 
-```js
-function doPost(e) {
-  const sheet = SpreadsheetApp.openById('SHEET_ID').getSheetByName('beta');
-  const d = JSON.parse(e.postData.contents);
-  sheet.appendRow([new Date(), d.email, d.instagram, d.at, d.source]);
-  return ContentService.createTextOutput('ok');
-}
-```
-
-비워 두면 데모 모드로, 신청 내역은 방문자 브라우저의 `localStorage('ce_beta_signups')`에만 남습니다.
 결제는 연결되어 있지 않습니다. 지금은 수요 확인용 신청만 받습니다.
 
 ## 주의
