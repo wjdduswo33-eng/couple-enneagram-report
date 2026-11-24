@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0F1726">
 <title>커플 에니어그램 심층 분석 · 카톡 내보내기 하나로 끝</title>
-<meta name="description" content="100문항 테스트 없이, 카톡 대화 내보내기 하나로 관계 속 진짜 본캐와 커플 사용설명서를 뽑습니다. 카톡 원문은 브라우저 안에서만 분석되고 서버에 저장되지 않습니다.">
+<meta name="description" content="100문항 테스트 대신, 카톡 대화 내보내기 1개와 12문항 2분으로 두 사람의 에니어그램 유형을 확정합니다. 여자·남자 프로필이 같은 분량으로 나란히 들어간 16쪽 커플 리포트. 카톡 원문은 브라우저 안에서만 분석되고 서버에 저장되지 않습니다.">
 <meta property="og:title" content="100문항 테스트 풀지 마세요 · 커플 에니어그램 심층 분석">
-<meta property="og:description" content="카톡 대화 내보내기 하나로 끝내는 커플 에니어그램 심층 분석. 원문은 브라우저 안에서만.">
+<meta property="og:description" content="카톡 대화 하나 + 12문항 2분. 두 사람 에니어그램이 나란히 들어간 16쪽 커플 리포트. 원문은 브라우저 안에서만.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -112,7 +112,7 @@ h2.sec{font-family:var(--serif);font-size:clamp(23px,5.6vw,30px);font-weight:600
 
 /* steps */
 .steps{display:grid;gap:1px;background:var(--line);border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:26px}
-@media(min-width:720px){.steps{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:560px){.steps{grid-template-columns:1fr 1fr}}
 .step{background:var(--paper);padding:22px 4px 24px}
 .step-no{font-family:var(--num);font-size:11px;letter-spacing:.16em;color:var(--terra);font-weight:600}
 .step h3{margin-top:9px;font-size:16px;font-weight:600;letter-spacing:-.02em}
@@ -335,8 +335,8 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
 
 /* desktop hero decoration (가상 샘플 수치) */
 .hero-deco{display:none}
-@media(min-width:1180px){
-  .hero-deco{display:block;position:absolute;right:5vw;top:132px;width:330px;transform:rotate(-1.2deg);opacity:.96}
+@media(min-width:1300px){
+  .hero-deco{display:block;position:absolute;right:clamp(10px,calc(50vw - 640px),240px);top:132px;width:310px;transform:rotate(-1.2deg);opacity:.96}
   .hd-card{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:20px 20px 18px;backdrop-filter:blur(6px);box-shadow:0 40px 90px -50px #000}
   .hd-cap{font-family:var(--num);font-size:9.5px;letter-spacing:.2em;color:#C9A961;text-transform:uppercase}
   .hd-name{margin-top:8px;font-family:var(--serif);font-size:20px;color:#fff;letter-spacing:-.02em}
@@ -363,6 +363,68 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
   .cta-row{flex-direction:row}
   .cta-row .btn{flex:1}
 }
+/* ============ what is enneagram ============ */
+.ennea{background:var(--paper);padding:50px 0 54px;border-bottom:1px solid var(--line)}
+.ennea-lead{margin-top:16px;font-family:var(--serif);font-size:clamp(17px,4.6vw,20px);line-height:1.74;font-weight:500;letter-spacing:-.03em;color:var(--ink)}
+.ennea-lead em{font-style:normal;color:var(--terra);background:linear-gradient(transparent 64%,rgba(201,113,79,.16) 64%)}
+.ennea-lead .vs{color:var(--ink-mute);font-weight:400}
+.ennea-note{margin-top:12px;font-size:13px;color:var(--ink-mute);line-height:1.7}
+.ennea-tri{display:grid;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px}
+@media(min-width:640px){.ennea-tri{grid-template-columns:repeat(3,1fr)}}
+.ennea-tri > div{background:#fff;padding:16px 15px}
+.ennea-tri .k{font-family:var(--num);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--terra);font-weight:600}
+.ennea-tri .t{margin-top:7px;font-size:14.5px;font-weight:600;letter-spacing:-.02em}
+.ennea-tri .d{margin-top:5px;font-size:12.5px;color:var(--ink-soft);line-height:1.62}
+.t9{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:18px}
+.t9 span{background:var(--paper-2);border:1px solid var(--line);border-radius:9px;padding:8px 6px;font-size:11.5px;color:var(--ink-soft);text-align:center;letter-spacing:-.02em;line-height:1.4}
+.t9 span b{display:block;font-family:var(--num);font-size:10px;color:var(--terra);font-weight:600;margin-bottom:1px}
+.t9-cap{margin-top:10px;font-size:11.5px;color:var(--ink-mute);line-height:1.6}
+
+/* ============ method · kakao + 12 questions ============ */
+.method{background:var(--paper-2);padding:52px 0 56px;border-top:1px solid var(--line)}
+.method .card{background:#fff}
+.said{margin-top:12px;font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:-.03em;color:var(--ink);line-height:1.25}
+.said small{font-family:var(--sans);font-size:12px;font-weight:400;color:var(--ink-mute);margin-left:9px;letter-spacing:0}
+.eq-rows{margin:14px 0 0;padding:0;list-style:none;border-top:1px solid var(--line)}
+.eq-rows li{display:flex;gap:10px;align-items:baseline;padding:10px 0;border-bottom:1px dashed var(--line);font-size:13.5px;color:var(--ink-soft);line-height:1.55}
+.eq-rows li:last-child{border-bottom:0;padding-bottom:0}
+.eq-rows .tag{flex:0 0 auto;font-family:var(--num);font-size:10px;letter-spacing:.05em;color:var(--sage);background:var(--sage-soft);border-radius:5px;padding:3px 7px;font-weight:600}
+.q-ex{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}
+.q-ex summary{cursor:pointer;list-style:none;font-size:13px;color:var(--ink-soft);display:flex;justify-content:space-between;gap:10px;font-weight:600}
+.q-ex summary::-webkit-details-marker{display:none}
+.q-ex summary::after{content:'+';color:var(--terra);font-size:15px;line-height:1}
+.q-ex[open] summary::after{content:'–'}
+.q-ex ol{margin:14px 0 0;padding:0;list-style:none;counter-reset:q}
+.q-ex li{counter-increment:q;padding:12px 0;border-top:1px solid var(--line);font-size:13px;line-height:1.66;color:var(--ink-soft)}
+.q-ex li::before{content:'Q' counter(q);display:block;font-family:var(--num);font-size:10px;letter-spacing:.14em;color:var(--terra);font-weight:600;margin-bottom:4px}
+.q-ex li b{color:var(--ink);font-weight:600}
+.method-note{margin-top:18px;font-size:12px;line-height:1.72;color:var(--ink-mute)}
+.method-note b{color:var(--ink-soft)}
+
+/* ============ report · two profiles ============ */
+.profiles{margin-top:28px;border-top:1px solid var(--line);padding-top:22px}
+.prof2{display:grid;gap:12px;margin-top:14px}
+@media(min-width:720px){.prof2{grid-template-columns:1fr 1fr}}
+.prof{border-radius:14px;padding:18px 16px 16px;border:1px solid transparent}
+.prof-a{background:var(--terra-soft);border-color:#EBD3C7}
+.prof-b{background:var(--sage-soft);border-color:#CFDFD7}
+.prof-top{display:flex;align-items:center;gap:8px}
+.prof-top .sex{font-family:var(--num);font-size:9.5px;letter-spacing:.1em;color:#fff;background:var(--terra);border-radius:4px;padding:2px 6px;font-weight:600}
+.prof-b .prof-top .sex{background:var(--sage)}
+.prof-top .nm{font-family:var(--serif);font-size:18px;font-weight:600;letter-spacing:-.02em}
+.prof-top .code{margin-left:auto;font-family:var(--num);font-size:15px;font-weight:600;color:var(--terra);letter-spacing:-.01em}
+.prof-b .prof-top .code{color:var(--sage)}
+.prof-tag{margin-top:7px;font-size:12px;color:var(--ink-soft);line-height:1.55}
+.prof dl{margin:12px 0 0;padding-top:11px;border-top:1px solid rgba(20,25,35,.12);font-size:12.5px;line-height:1.6}
+.prof dt{font-family:var(--num);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-mute);margin-top:9px}
+.prof dt:first-child{margin-top:0}
+.prof dd{margin:2px 0 0;color:#2B303A}
+.prof-join{margin-top:12px;background:var(--navy);color:#fff;border-radius:14px;padding:18px 17px}
+.prof-join .card-cap{color:var(--gold);opacity:.95}
+.prof-join p{margin-top:8px;font-size:13.5px;line-height:1.74;color:#C6D0DE}
+.prof-join p b{color:#fff;font-weight:600}
+.prof-join .why{margin-top:9px;font-size:11.5px;color:#8D9AB0;line-height:1.6}
+
 @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
 </style>
 </head>
@@ -378,7 +440,7 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
       <span class="l2">카톡 대화 내보내기 하나로 끝내는 커플 에니어그램 심층 분석</span>
     </h1>
     <div class="hero-rule" aria-hidden="true"></div>
-    <p class="hero-sub">내가 찍은 <b>'되고 싶은 나'</b>가 아니라, 실제 카톡 <b>말투·답장 속도·화해 패턴</b>으로 관계 속 진짜 본캐와 부부/커플 사용설명서를 뽑아줍니다.</p>
+    <p class="hero-sub">내가 찍은 <b>'되고 싶은 나'</b>가 아니라, 실제 카톡 <b>말투·답장 속도·화해 패턴</b>으로 관계 속 진짜 본캐를 뽑습니다. 카톡이 좁힌 유형 후보를 <b>12문항·2분</b>으로 확정하고, 두 사람의 에니어그램이 <b>같은 분량으로 나란히</b> 들어간 설명서를 드립니다.</p>
 
     <div class="assure">
       <svg width="15" height="16" viewBox="0 0 15 16" fill="none" aria-hidden="true"><path d="M7.5 1 13 3.3v4.4c0 3.3-2.3 6.1-5.5 7.3C4.3 13.8 2 11 2 7.7V3.3L7.5 1Z" stroke="#C9A961" stroke-width="1.2" stroke-linejoin="round"/><path d="m5.3 7.7 1.6 1.6 2.9-3.1" stroke="#C9A961" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -392,7 +454,7 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
       </button>
       <button class="btn btn-ghost" id="heroSample">샘플 커플로 1초 체험하기</button>
     </div>
-    <p class="hero-meta">문항 0개 <span>·</span> 파일 1개 <span>·</span> 약 30초 <span>·</span> 16쪽 PDF</p>
+    <p class="hero-meta">무료 맛보기 30초 <span>·</span> 12문항 2분 <span>·</span> 16쪽 리포트</p>
   </div>
   <div class="hero-deco" aria-hidden="true">
     <div class="hd-card">
@@ -415,12 +477,47 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
   </div>
 </header>
 
+<!-- ================= WHAT IS ENNEAGRAM ================= -->
+<section class="ennea" id="what">
+  <div class="wrap">
+    <p class="sec-cap">What is Enneagram</p>
+    <h2 class="sec">MBTI가 '행동'을 본다면,<br>에니어그램은 '이유'를 봅니다</h2>
+    <p class="ennea-lead">MBTI는 내가 평소에 <em>어떻게 행동하는지</em>를 보여줍니다. 에니어그램은 그 행동 밑에 깔린 <em>핵심 두려움·핵심 욕구</em>를 9가지 유형으로 봅니다. 그래서 "왜 우리는 늘 같은 자리에서 똑같이 싸우는지"가 여기서 설명됩니다.</p>
+    <p class="ennea-note">둘 다 검사지가 아니라 <b>사람을 이해하는 언어</b>입니다. 다른 점은, 에니어그램은 겉으로 보이는 습관이 아니라 그 습관을 만든 동기를 다룬다는 것.</p>
+
+    <div class="ennea-tri">
+      <div>
+        <div class="k">Core fear</div>
+        <div class="t">핵심 두려움</div>
+        <div class="d">이 사람이 인생에서 가장 마주하고 싶지 않은 것. 대화가 위험해지는 순간이 여기서 갈립니다.</div>
+      </div>
+      <div>
+        <div class="k">Core desire</div>
+        <div class="t">핵심 욕구</div>
+        <div class="d">그래서 관계에서 계속 찾는 것. 상대가 이걸 못 채우면 애정이 있어도 서운합니다.</div>
+      </div>
+      <div>
+        <div class="k">Stress</div>
+        <div class="t">스트레스 반응</div>
+        <div class="d">지치고 불안할 때 무너지는 방향. 평소와 달라지는 말투가 바로 이 지점의 신호입니다.</div>
+      </div>
+    </div>
+
+    <div class="t9" aria-label="에니어그램 9유형">
+      <span><b>1</b>원칙형</span><span><b>2</b>돌봄형</span><span><b>3</b>성취형</span>
+      <span><b>4</b>감정결형</span><span><b>5</b>관찰형</span><span><b>6</b>확인형</span>
+      <span><b>7</b>온도형</span><span><b>8</b>직진형</span><span><b>9</b>톤맞춤형</span>
+    </div>
+    <p class="t9-cap">9유형 각각에 옆 유형의 기운이 하나 붙습니다(날개). 그래서 <b>2w1</b>·<b>8w7</b>처럼 표기합니다 — 2번에 1번의 날개가 붙은 사람, 이라는 뜻입니다.</p>
+  </div>
+</section>
+
 <!-- ================= STEPS ================= -->
 <section class="pad-sm">
   <div class="wrap">
     <p class="sec-cap">How it works</p>
     <h2 class="sec">검사지 대신, 이미 쌓인 3년치 대화</h2>
-    <p class="sec-sub">문항에 답할 때의 '나'는 늘 조금 미화되어 있습니다. 대신 손에 이미 있는 기록이 답하게 합니다.</p>
+    <p class="sec-sub">검사지 앞에서의 '나'는 늘 조금 미화되어 있습니다. 대신 손에 이미 있는 기록이 먼저 답하게 하고, 12문항은 그 기록이 끝내 답하지 못한 한 가지에만 씁니다.</p>
     <div class="steps">
       <div class="step">
         <div class="step-no">STEP 01</div>
@@ -435,7 +532,12 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
       <div class="step">
         <div class="step-no">STEP 03</div>
         <h3>30초 뒤, 맛보기 리포트</h3>
-        <p>대화 시작권·답장 속도·말버릇·본캐 티저까지 바로. 16쪽 심층 리포트는 신청 후 받습니다.</p>
+        <p>대화 시작권·답장 속도·말버릇·본캐 티저까지 바로. 유형은 아직 '후보' 단계입니다.</p>
+      </div>
+      <div class="step">
+        <div class="step-no">STEP 04</div>
+        <h3>12문항 2분 → 유형 확정</h3>
+        <p>카톡이 좁힌 후보 2~3개 중 어느 쪽 마음인지만 고르면, 두 사람 유형이 확정되고 16쪽 리포트가 나옵니다.</p>
       </div>
     </div>
   </div>
@@ -488,12 +590,95 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
   <div class="wrap" id="resultBody"></div>
 </section>
 
+<!-- ================= METHOD · KAKAO + 12 QUESTIONS ================= -->
+<section class="method" id="accuracy">
+  <div class="wrap">
+    <p class="sec-cap">Accuracy · 카톡 + 12문항</p>
+    <h2 class="sec">카톡만으로는 절반만 보입니다</h2>
+    <p class="sec-sub">말투는 <b>어떻게</b> 싸우는지는 알려주지만, <b>왜 그 말이 아픈지</b>는 알려주지 않습니다. 카톡이 후보를 좁히고, 12문항이 마지막 한 칸을 채웁니다.</p>
+
+    <div class="card">
+      <div class="card-cap">같은 말, 세 가지 뜻</div>
+      <div class="said">"괜찮아"<small>이 한 마디가 카톡에는 똑같이 남습니다</small></div>
+      <ul class="eq-rows">
+        <li><span class="tag">2번 · 배려</span>서운한데 참고 넘어가는 말</li>
+        <li><span class="tag">6번 · 불안</span>확신이 없어서 일단 멈추는 말</li>
+        <li><span class="tag">9번 · 회피</span>갈등이 커지기 싫어 접는 말</li>
+      </ul>
+      <p class="note">말투만 보면 이 셋이 구분되지 않습니다. 상대는 '괜찮다'고 읽고, 당신은 '모른다'고 읽습니다. 그래서 같은 대화를 두고 한쪽은 끝났다고, 한쪽은 아직이라고 느끼는 것입니다.</p>
+    </div>
+
+    <div class="chapters" style="margin-top:18px;border-top:1px solid var(--line)">
+      <div class="ch">
+        <div class="no">①</div>
+        <div><div class="tt">카톡 대화 통계 (자동)</div>
+        <div class="dd">답장 속도·말버릇·질문 비율·갈등에서 화해까지 걸린 시간으로 <b>유형 후보를 2~3개</b>로 좁힙니다. 무료 맛보기에서 보시는 숫자들입니다.</div></div>
+      </div>
+      <div class="ch">
+        <div class="no">②</div>
+        <div><div class="tt">핵심 12문항 · 2분</div>
+        <div class="dd">두 사람 몫 6문항씩, 남은 후보 중 "어느 쪽 마음인지"만 고르는 강제선택. 9유형을 처음부터 다 묻지 않으니까 2분이면 끝납니다.</div></div>
+      </div>
+      <div class="ch">
+        <div class="no">③</div>
+        <div><div class="tt">두 사람 유형 확정</div>
+        <div class="dd">2w1·8w7처럼 날개까지 확정되고, 두 사람 프로필이 <b>같은 분량으로 나란히</b> 리포트에 들어갑니다. 한쪽만 깊게 파는 리포트가 아닙니다.</div></div>
+      </div>
+    </div>
+
+    <details class="q-ex">
+      <summary>12문항은 이런 식입니다 (예시 3개)</summary>
+      <ol>
+        <li><b>다툰 다음 날, 먼저 잠잠해졌을 때 더 신경 쓰이는 것은?</b><br>① 상대가 진짜 괜찮은지 계속 확인하고 싶다 &nbsp;② 내 서운함이 전달됐는지가 더 걸린다 &nbsp;③ 이 분위기가 길어지는 게 먼저 싫다</li>
+        <li><b>상대가 "내가 알아서 할게"라고 할 때, 속으로 먼저 드는 생각은?</b><br>① 고맙긴 한데 내가 필요 없나 싶어 서운하다 &nbsp;② 미안하지만 한 번 더 물어보고 싶다 &nbsp;③ 좋아, 그럼 맡기자 — 굳이 안 물어본다</li>
+        <li><b>화해할 때 당신에게 꼭 필요한 한 가지는?</b><br>① 내 마음이 어땠는지 한 번은 들어주는 것 &nbsp;② 다음에 어떻게 할지 정해지는 것 &nbsp;③ 그냥 평소처럼 돌아가는 것</li>
+      </ol>
+      <p class="note" style="margin-top:12px">번호마다 다른 유형의 동기가 걸려 있습니다. 카톡에서 후보를 좁혀 둔 상태라면, 이 12문항이면 충분합니다.</p>
+    </details>
+
+    <p class="method-note"><b>상대방은 아무것도 하지 않아도 됩니다.</b> 12문항도 당신이 두 사람 몫을 답하면 끝(2분). 상대가 자기 몫을 직접 답하면 정확도가 더 올라가지만, 선택입니다.<br>12문항은 정식 오픈하는 리포트에서 함께 받습니다. 지금은 베타 신청만 받고 있습니다.</p>
+  </div>
+</section>
+
 <!-- ================= PAYWALL ================= -->
 <section class="report" id="report">
   <div class="wrap">
     <p class="sec-cap">Full report · 16 pages</p>
     <h2 class="sec">맛보기는 여기까지.<br>이제 두 사람의 설명서.</h2>
     <p class="sec-sub">무료 결과는 "우리가 어떤 사람들인지"까지입니다. 16쪽 리포트는 <b>왜 그 지점에서 부딪히고, 무엇을 바꾸면 덜 다치는지</b>까지 갑니다.</p>
+
+    <div class="profiles">
+      <p class="sec-cap">Sample · 리포트 p.1 미리보기</p>
+      <h3 class="sec" style="font-size:clamp(19px,4.8vw,23px);margin-top:8px">두 사람 프로필이 같은 무게로 나란히</h3>
+      <p class="sec-sub" style="font-size:13.5px">가상 샘플 커플(지민 × 현우)의 실제 리포트 1페이지 구성입니다. 실제 데이터가 아닙니다.</p>
+      <div class="prof2">
+        <div class="prof prof-a">
+          <div class="prof-top"><span class="sex">여자</span><span class="nm">지민</span><span class="code">2w1</span></div>
+          <div class="prof-tag">돌봄형 · 필요를 먼저 알아채는 사람</div>
+          <dl>
+            <dt>핵심 욕구</dt><dd>사랑받고, 필요로 여겨지는 것</dd>
+            <dt>핵심 두려움</dt><dd>필요 없는 사람이 되는 것</dd>
+            <dt>스트레스 반응</dt><dd>8번처럼 통제적으로 돌변 — "내가 이만큼 했는데"</dd>
+            <dt>갈등 트리거</dt><dd>서운함을 문장 대신 신호로 보내다가, 못 알아채면 터짐</dd>
+          </dl>
+        </div>
+        <div class="prof prof-b">
+          <div class="prof-top"><span class="sex">남자</span><span class="nm">현우</span><span class="code">8w7</span></div>
+          <div class="prof-tag">직진형 · 결론을 먼저 말하는 사람</div>
+          <dl>
+            <dt>핵심 욕구</dt><dd>스스로 결정하고, 지배당하지 않는 것</dd>
+            <dt>핵심 두려움</dt><dd>통제당하거나 약해 보이는 것</dd>
+            <dt>스트레스 반응</dt><dd>5번처럼 말수가 줄고 혼자 정리하러 사라짐</dd>
+            <dt>갈등 트리거</dt><dd>감정보다 결론부터, 해결책만 던져서 "내 마음은 안 읽힘"</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="prof-join">
+        <p class="card-cap">둘이 만나면</p>
+        <p>지민은 <b>"말해줘"</b>를 기다리고, 현우는 <b>"해결했으니 끝"</b>이라고 믿습니다. 같은 대화를 두 사람이 정반대로 읽는 이 지점이 Chapter 05의 '반복되는 3개의 충돌'입니다.</p>
+        <p class="why">위 프로필은 두 사람 몫의 같은 항목(핵심 욕구·두려움·스트레스·갈등 트리거)을 같은 분량으로 적은 것입니다. 유형이 바뀌면 문장도 전부 다시 씁니다.</p>
+      </div>
+    </div>
 
     <div class="locked" aria-hidden="true">
       <div class="locked-inner">
@@ -512,8 +697,8 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
     </div>
 
     <div class="chapters">
-      <div class="ch"><div class="no">01</div><div><div class="tt">개인 심층 프로파일</div><div class="dd">본캐·날개·본능 스택(SX/SO/SP)과 스트레스 시 이동 경로</div></div><div class="pg">p.4</div></div>
-      <div class="ch"><div class="no">02</div><div><div class="tt">상대방 유형 해부</div><div class="dd">겉으로 보이는 모습과 실제 동기의 간극, 오해받는 지점</div></div><div class="pg">p.6</div></div>
+      <div class="ch"><div class="no">01</div><div><div class="tt">두 사람의 개인 프로파일</div><div class="dd">여자·남자 두 사람을 같은 분량으로. 본캐·날개·본능 스택(SX/SO/SP)과 스트레스 시 이동 경로</div></div><div class="pg">p.4</div></div>
+      <div class="ch"><div class="no">02</div><div><div class="tt">서로를 오해하는 지점</div><div class="dd">겉으로 보이는 모습과 실제 동기의 간극, 각자가 오해받는 자리</div></div><div class="pg">p.6</div></div>
       <div class="ch"><div class="no">03</div><div><div class="tt">대화 역학 · 주제 오너십</div><div class="dd">누가 대화를 열고, 누가 주제를 소유하며, 누가 닫는가</div></div><div class="pg">p.8</div></div>
       <div class="ch"><div class="no">04</div><div><div class="tt">갈등 · 화해 타임라인</div><div class="dd">싸움이 시작되는 문장과, 풀리는 데 걸린 실제 시간</div></div><div class="pg">p.10</div></div>
       <div class="ch"><div class="no">05</div><div><div class="tt">시너지와 마찰</div><div class="dd">서로를 살리는 조합과 반복되는 3개의 충돌 지점</div></div><div class="pg">p.12</div></div>
@@ -560,15 +745,15 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
     <div class="faq">
       <details>
         <summary>상대방도 이걸 해야 하나요?</summary>
-        <p>아니요. 내 카톡방의 내보내기 파일 하나면 두 사람의 말투가 모두 담깁니다. 상대에게 검사를 요구하지 않는 것이 이 방식의 가장 큰 장점입니다.</p>
+        <p>아니요. 내 카톡방의 내보내기 파일 하나면 두 사람의 말투가 모두 담깁니다. 뒤이어 나오는 12문항도 당신이 두 사람 몫을 답하면 끝입니다(2분). 상대가 자기 몫을 직접 답하면 정확도가 더 올라가지만, 필수는 아닙니다.</p>
       </details>
       <details>
         <summary>에니어그램 유형은 얼마나 정확한가요?</summary>
-        <p>정식 검사(문항 응답)를 대체하지 않습니다. 이 리포트의 유형은 말투·답장 속도·질문 비율·감정 단어·주도권 같은 <b>행동 지표로 추정한 가설</b>이며, 그래서 '본캐 티저'라고 부릅니다. 신뢰도가 낮게 나오면 리포트에 그 사실을 먼저 적습니다.</p>
+        <p>정식 검사(100문항 응답)를 대체하지는 않습니다. 대신 두 단계로 좁힙니다. 카톡 지표로 <b>후보 유형 2~3개</b>를 먼저 추리고, <b>12문항(2분)</b>으로 그중 어느 쪽 마음인지 교차 검증해 확정합니다. 그래도 경계에 걸리면 리포트에 "N번과 M번 사이"라고 먼저 적습니다.</p>
       </details>
       <details>
         <summary>대화가 적으면 결과가 달라지나요?</summary>
-        <p>네. 200건 미만이면 지표가 흔들립니다. 맛보기 화면에서 표본이 부족하다고 판단되면 그 사실을 먼저 알려드립니다.</p>
+        <p>네. 200건 미만이면 지표가 흔들립니다. 맛보기 화면에서 표본이 부족하다고 판단되면 그 사실을 먼저 알려드립니다. 대화가 적게 쌓인 커플일수록 12문항이 하는 일이 커집니다.</p>
       </details>
       <details>
         <summary>지금 결제되나요?</summary>
@@ -1240,12 +1425,12 @@ function renderResult(data){
       <div class="card-cap">04 · 관계 속 본캐 티저</div>
       <h3>대화 습관으로 추정한 유형</h3>
       <div class="types">${typeCards}</div>
-      <p class="note">유형은 문항 응답이 아니라 말투·답장 속도·질문 비율·감정 단어·주도권 지표로 추정한 <b>가설</b>입니다. 16쪽 리포트에서는 이 가설을 대화 장면으로 검증합니다.</p>
+      <p class="note">유형은 문항 응답이 아니라 말투·답장 속도·질문 비율·감정 단어·주도권 지표로 추정한 <b>가설</b>입니다. 16쪽 리포트에서는 이 가설을 12문항으로 교차 검증해 확정하고, 두 사람 유형을 같은 분량으로 나란히 놓습니다.</p>
     </div>
 
     <div class="res-cta">
       <button class="btn btn-dark" id="toReport">16쪽 심층 리포트 보기 · 9,900원</button>
-      <p>맛보기에서는 두 사람의 '구조'까지만 보여드립니다</p>
+      <p>맛보기에서는 두 사람의 '구조'까지만 보여드립니다 · 유형 확정과 16쪽 리포트는 12문항 2분 후에</p>
     </div>
     <p class="fine">이 결과는 이 브라우저에서만 계산되었습니다. 원문 대화는 저장되지 않았고, 위 카드에는 집계값과 짧은 표현만 남습니다.</p>
   `;
