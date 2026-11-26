@@ -103,6 +103,27 @@ a{color:inherit}
 .hero-meta{margin-top:18px;font-family:var(--num);font-size:12px;letter-spacing:.06em;color:#8794A8}
 .hero-meta span{color:#5B6982;margin:0 8px}
 
+/* 히어로 · 오픈 알림 신청 (카톡 파일 없이 연락처만) */
+.alert-cta{
+  margin-top:12px;width:100%;display:flex;align-items:center;gap:11px;
+  padding:11px 14px;border-radius:12px;text-align:left;
+  background:linear-gradient(180deg,rgba(201,169,97,.15),rgba(201,169,97,.055));
+  border:1px solid rgba(201,169,97,.45);
+  transition:border-color .18s ease, background .18s ease, transform .15s ease;
+}
+.alert-cta:hover{background:linear-gradient(180deg,rgba(201,169,97,.23),rgba(201,169,97,.1));border-color:rgba(201,169,97,.74)}
+.alert-cta:active{transform:translateY(1px) scale(.997)}
+.alert-ico{flex:0 0 auto;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(201,169,97,.18);color:var(--gold)}
+.alert-tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.alert-tx b{font-size:14.5px;font-weight:600;letter-spacing:-.01em;color:#fff;line-height:1.35}
+.alert-tx em{font-style:normal;font-size:11.5px;color:#C6B58E;line-height:1.4;letter-spacing:-.005em}
+.alert-ar{margin-left:auto;flex:0 0 auto;color:var(--gold);opacity:.85;font-family:var(--num);font-size:13px}
+@media(min-width:560px){
+  .alert-cta{padding:12px 16px}
+  .alert-tx{flex-direction:row;align-items:baseline;gap:10px}
+  .alert-tx em{font-size:12px}
+}
+
 /* ============ sections ============ */
 section{position:relative}
 .pad{padding:56px 0}
@@ -454,6 +475,18 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
       </button>
       <button class="btn btn-ghost" id="heroSample">샘플 커플로 1초 체험하기</button>
     </div>
+
+    <button class="alert-cta" id="openAlert" type="button">
+      <span class="alert-ico" aria-hidden="true">
+        <svg width="15" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 4.6a4.5 4.5 0 0 0-4.5 4.5c0 3.5-1.35 5-1.35 5h11.7s-1.35-1.5-1.35-5A4.5 4.5 0 0 0 12 4.6Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M10.4 17.4a1.7 1.7 0 0 0 3.2 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </span>
+      <span class="alert-tx">
+        <b>오픈 알림 신청</b>
+        <em>카톡 파일 없이, 이메일만 남기면 끝</em>
+      </span>
+      <span class="alert-ar" aria-hidden="true">→</span>
+    </button>
+
     <p class="hero-meta">무료 맛보기 30초 <span>·</span> 12문항 2분 <span>·</span> 16쪽 리포트</p>
   </div>
   <div class="hero-deco" aria-hidden="true">
@@ -776,26 +809,26 @@ footer .fl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;ma
   <div class="modal-card">
     <button class="modal-x" id="closeBeta" aria-label="닫기">×</button>
     <div id="betaFormView">
-      <p class="eyebrow">Early bird · <span class="ko">1순위</span></p>
+      <p class="eyebrow" id="betaEyebrow">Early bird · <span class="ko">1순위</span></p>
       <h3 id="betaTitle">풀 리포트 베타 신청</h3>
-      <p class="lead">정식 오픈하면 <b>가장 먼저</b>, 9,900원 얼리버드 링크를 보내드립니다. 지금은 결제가 일어나지 않습니다.</p>
+      <p class="lead" id="betaLead">정식 오픈하면 <b>가장 먼저</b>, 9,900원 얼리버드 링크를 보내드립니다. 지금은 결제가 일어나지 않습니다.</p>
       <div class="field" id="emailField">
-        <label for="betaEmail">받을 이메일 <span class="opt">(필수)</span></label>
+        <label for="betaEmail" id="emailLabel">받을 이메일 <span class="opt">(필수)</span></label>
         <input type="email" id="betaEmail" inputmode="email" autocomplete="email" placeholder="you@example.com">
       </div>
       <div class="field">
-        <label for="betaInsta">인스타 ID <span class="opt">(선택)</span></label>
+        <label for="betaInsta" id="instaLabel">인스타 ID <span class="opt">(선택)</span></label>
         <input type="text" id="betaInsta" autocomplete="off" placeholder="@your_id">
-        <div class="hint">DM으로도 안내드릴 수 있어요.</div>
+        <div class="hint" id="instaHint">DM으로도 안내드릴 수 있어요.</div>
       </div>
       <div class="form-err hidden" id="betaErr"></div>
       <button class="btn btn-primary" id="submitBeta">베타 1순위로 신청하기</button>
-      <p class="fine">입력한 이메일·인스타 ID는 구글 폼으로 접수되어 오픈 안내에만 쓰고, 그 외 목적으로 쓰지 않습니다.</p>
+      <p class="fine" id="betaFine">입력한 이메일·인스타 ID는 구글 폼으로 접수되어 오픈 안내에만 쓰고, 그 외 목적으로 쓰지 않습니다.</p>
     </div>
     <div id="betaDoneView" class="thanks hidden">
       <div class="ok"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12.5 4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      <h3>신청되었습니다</h3>
-      <p>베타 1순위로 기록했어요.<br>실제 오픈 시 <b>1순위 할인 링크</b>를 가장 먼저 보내드립니다.</p>
+      <h3 id="betaDoneTitle">신청되었습니다</h3>
+      <p id="betaDoneText">베타 1순위로 기록했어요.<br>실제 오픈 시 <b>1순위 할인 링크</b>를 가장 먼저 보내드립니다.</p>
       <span class="pill-note" id="betaStamp">신청 접수 완료</span>
       <button class="btn btn-line" id="doneClose">닫기</button>
     </div>
@@ -843,6 +876,41 @@ function entrySource(){
     if (document.referrer) return 'referrer:' + new URL(document.referrer).host;
   } catch(e){}
   return 'direct';
+}
+
+/* 모달 모드별 문구 — 같은 Google Form 으로 접수하고 유입 경로 값으로만 구분합니다. */
+const MODAL_COPY = {
+  beta: {
+    eyebrow : 'Early bird · <span class="ko">1순위</span>',
+    title   : '풀 리포트 베타 신청',
+    lead    : '정식 오픈하면 <b>가장 먼저</b>, 9,900원 얼리버드 링크를 보내드립니다. 지금은 결제가 일어나지 않습니다.',
+    email   : '받을 이메일 <span class="opt">(필수)</span>',
+    insta   : '인스타 ID <span class="opt">(선택)</span>',
+    hint    : 'DM으로도 안내드릴 수 있어요.',
+    submit  : '베타 1순위로 신청하기',
+    fine    : '입력한 이메일·인스타 ID는 구글 폼으로 접수되어 오픈 안내에만 쓰고, 그 외 목적으로 쓰지 않습니다.',
+    doneT   : '신청되었습니다',
+    doneB   : '베타 1순위로 기록했어요.<br>실제 오픈 시 <b>1순위 할인 링크</b>를 가장 먼저 보내드립니다.',
+    tag     : ''
+  },
+  alert: {
+    eyebrow : 'Open alert · <span class="ko">오픈 알림</span>',
+    title   : '오픈 알림 신청',
+    lead    : '정식 오픈하는 날 <b>가장 먼저</b> 알려드릴게요. 카톡 파일도, 결제도 필요 없습니다. 연락받을 곳 하나만 남겨 주세요.',
+    email   : '받을 이메일 <span class="opt">(필수)</span>',
+    insta   : '인스타 ID <span class="opt">(선택)</span>',
+    hint    : 'DM으로도 알려드릴 수 있어요.',
+    submit  : '오픈 알림 신청하기',
+    fine    : '입력한 연락처는 구글 폼으로 접수되어 오픈 안내에만 쓰고, 그 외 목적으로 쓰지 않습니다.',
+    doneT   : '신청되었습니다',
+    doneB   : '오픈 알림 명단에 넣었어요.<br>정식 오픈하는 날 <b>가장 먼저</b> 연락드릴게요.',
+    tag     : 'open-alert'
+  }
+};
+function sourceTag(mode){
+  const base = entrySource();
+  const t = (MODAL_COPY[mode] || MODAL_COPY.beta).tag;
+  return t ? base + ' · ' + t : base;
 }
 
 /* ---------------- utils ---------------- */
@@ -1528,11 +1596,37 @@ function bind(){
   };
   $('#heroSample').addEventListener('click', sample);
 
-  // 베타 모달
+  // 베타 / 오픈 알림 모달 (같은 폼, mode 로 문구·유입경로 구분)
   const modal = $('#betaModal');
-  const open = ()=>{ modal.classList.remove('hidden'); document.body.style.overflow='hidden'; setTimeout(()=>$('#betaEmail').focus(), 260); };
+  let modalMode = 'beta';
+  const applyMode = (mode)=>{
+    const c = MODAL_COPY[mode] || MODAL_COPY.beta;
+    $('#betaEyebrow').innerHTML = c.eyebrow;
+    $('#betaTitle').textContent = c.title;
+    $('#betaLead').innerHTML = c.lead;
+    $('#emailLabel').innerHTML = c.email;
+    $('#instaLabel').innerHTML = c.insta;
+    $('#instaHint').textContent = c.hint;
+    $('#submitBeta').textContent = c.submit;
+    $('#betaFine').innerHTML = c.fine;
+    $('#betaDoneTitle').textContent = c.doneT;
+    $('#betaDoneText').innerHTML = c.doneB;
+    $('#betaFormView').classList.remove('hidden');
+    $('#betaDoneView').classList.add('hidden');
+    $('#betaErr').classList.add('hidden');
+    $('#emailField').classList.remove('bad');
+  };
+  const open = (mode)=>{
+    modalMode = (mode === 'alert') ? 'alert' : 'beta';
+    applyMode(modalMode);
+    modal.classList.remove('hidden');
+    document.body.style.overflow='hidden';
+    setTimeout(()=>$('#betaEmail').focus(), 260);
+  };
   const close = ()=>{ modal.classList.add('hidden'); document.body.style.overflow=''; };
-  $('#openBeta').addEventListener('click', open);
+  $('#openBeta').addEventListener('click', ()=>open('beta'));
+  const alertBtn = $('#openAlert');
+  if (alertBtn) alertBtn.addEventListener('click', ()=>open('alert'));
   $('#closeBeta').addEventListener('click', close);
   $('#doneClose').addEventListener('click', close);
   modal.addEventListener('click', e=>{ if (e.target === modal) close(); });
@@ -1552,14 +1646,15 @@ function bind(){
     }
     err.classList.add('hidden'); fld.classList.remove('bad');
     const btn = $('#submitBeta');
+    const label = (MODAL_COPY[modalMode] || MODAL_COPY.beta).submit;
     btn.disabled = true; btn.textContent = '신청 중...';
     await submitBeta({
       email: email,
       instagram: insta,
       at: nowStamp(),
-      source: entrySource()
+      source: sourceTag(modalMode)
     });
-    btn.disabled = false; btn.textContent = '베타 1순위로 신청하기';
+    btn.disabled = false; btn.textContent = label;
     $('#betaEmail').value = ''; $('#betaInsta').value = '';
     $('#betaFormView').classList.add('hidden');
     $('#betaDoneView').classList.remove('hidden');
